@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEREYKA — Future Fashion</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --neon: #00ffcc;
+            --dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --gold: #d4af37;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Артқы жақтағы жылжымалы градиент */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, #1a1a1a 0%, #000 70%);
+            z-index: -1;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: url('https://unsplash.com') center/cover;
+            background-attachment: fixed;
+        }
+
+        .brand-title {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 700;
+            letter-spacing: 20px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, var(--neon), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(0,255,204,0.2)); }
+            to { filter: drop-shadow(0 0 30px rgba(0,255,204,0.6)); }
+        }
+
+        /* Сәнді карточкалар */
+        .container {
+            padding: 100px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .item {
+            position: relative;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .item:hover {
+            transform: translateY(-20px) scale(1.02);
+            border-color: var(--neon);
+            box-shadow: 0 20px 40px rgba(0, 255, 204, 0.1);
+        }
+
+        .item img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 15px;
+            filter: grayscale(40%);
+            transition: 0.5s;
+        }
+
+        .item:hover img { filter: grayscale(0%); }
+
+        .item-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-family: 'Syncopate', sans-serif;
+            color: var(--neon);
+            font-size: 1.2rem;
+        }
+
+        .buy-btn {
+            background: transparent;
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: var(--neon);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon);
+        }
+
+        /* Қалқымалы себет */
+        .cart-status {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--neon);
+            color: #000;
+            padding: 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,255,204,0.4);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Погода және Валюта виджеті */
+        .widgets {
+            position: absolute;
+            top: 20px;
+            left: 5%;
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.6);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="widgets">
+        <span>WEATHER: +24°C / ALMATY</span>
+        <span>USD: 445.2 ₸</span>
+    </div>
+    <h1 class="brand-title">MEREYKA</h1>
+    <p style="letter-spacing: 5px; opacity: 0.7;">EST. 2024 | THE FUTURE OF CLOTHING</p>
+</header>
+
+<div class="container">
+    <div class="item">
+        <img src="https://th.bing.com/th/id/OIP.TN76TmZq0Qn9WmU0eKzU3gHaLa?w=201&h=310&c=7&r=0&o=7&pid=1.7&rm=3" alt="Cyber Hoodie">
+        <div class="item-info">
+            <div>
+                <h3>NEON HOODIE</h3>
+                <p class="price">25 000 ₸</p>
+            </div>
+            <button class="btn buy-btn" onclick="add(25000)">ADD</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.UjA4I_vvM-5Tt3lUYo7CXQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Cyber Pants">
+        <div class="item-info">
+            <div>
+                <h3>CYBER PANTS</h3>
+                <p class="price">32 000 ₸</p>
+            </div>
+            <button class="btn buy-btn" onclick="add(32000)">ADD</button>
+        </div>
+    </div>
+
+    <div class="item">
+        <img src="https://th.bing.com/th/id/OIP.z_tHhG6cI3iA6XWPs2941QHaJ3?w=203&h=271&c=7&r=0&o=7&pid=1.7&rm=3" alt="Future Shirt">
+        <div class="item-info">
+            <div>
+                <h3>VOID SHIRT</h3>
+                <p class="price">18 500 ₸</p>
+            </div>
+            <button class="btn buy-btn" onclick="add(18500)">ADD</button>
+        </div>
+    </div>
+</div>
+
+<div class="cart-status" onclick="alert('Тапсырыс беру бөліміне өту...')">
+    🛒 <span id="cart-total">0</span> ₸
+</div>
+
+<script>
+    let total = 0;
+    function add(price) {
+        total += price;
+        document.getElementById('cart-total').innerText = total.toLocaleString();
+        
+        // Батырманы басқанда вибрация эффектісі (тек мобильдіде)
+        if (window.navigator.vibrate) window.navigator.vibrate(50);
+    }
+</script>
+
+</body>
+</html>
